@@ -9,5 +9,6 @@ var bot = ICHC({
         this.send('Oh, hi there @' + data.username);
 }).on('userJoin', function(data){
     this.whisper(data.username, 'Welcome to the room @' + data.username + '!');
-}).
-connect();
+}).connect(function(){
+    this.send('I\'m alive!');
+});

@@ -45,9 +45,8 @@ module.exports = function(config){
 
     /* private variables of interest */
     var apiVersion = 1,
-    baseURL = 'http://www.icanhazchat.com/api.ashx?v=' + apiVersion;
+    baseURL = 'http://www.icanhazchat.com/api.ashx?v=' + apiVersion,
     isConnected = false,
-    isModded = false,
     keyedURL = '',
     cammers = {},
     listeners = {
@@ -65,8 +64,14 @@ module.exports = function(config){
         error: []
     },
     trigger = function(type, data){
-        listeners[type].forEach(function(listener){
-            listener.call(chain, data);
+        var modifiedData = {
+            eventType: type
+        };
+        for(var x in data)
+            if(x != 'eventType')
+                modifiedData[x] = data[x];
+        (listeners[type] || []).forEach(function(listener){
+            listener.call(chain, modifiedData);
         });
     },
     error = function(message){

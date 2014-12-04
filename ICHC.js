@@ -79,8 +79,7 @@ module.exports = function(config){
             trigger('error', {
                 message: message
             });
-        } else
-            throw message;
+        }
     },
     makeRequest = function(params, success, fail){
         var url = isConnected ? keyedURL : baseURL;
@@ -159,19 +158,24 @@ module.exports = function(config){
                     break;
 
                 case 'msg':
-                    var parse = line.match(/^.+\|(.+?)\|.+?\|(.+)/);
-                    trigger('whisper', {
-                        username: parse[1],
-                        message: parse[2]
-                    });
+                    var parse = line.match(/^.+\|(.+?)\|.+?\|(.+)/),
+                    username = parse[1];
+                    if(username != config.user){
+                        trigger('whisper', {
+                            username: username,
+                            message: parse[2]
+                        });
+                    }
                     break;
 
                 case 'priv':
                     var parse = line.match(/^.+\|(.+?)\|(.+)/);
-                    trigger('pm', {
-                        username: parse[1],
-                        message: parse[2]
-                    });
+                    if(!/\|from you to /.test(line)){
+                        trigger('pm', {
+                            username: parse[1],
+                            message: parse[2]
+                        });
+                    }
                     break;
 
                 case 'hi':

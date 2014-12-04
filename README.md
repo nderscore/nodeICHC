@@ -129,14 +129,16 @@ Event types
 
 Here is a list of all available event types for `.on` and `.off` with descriptions of the data they pass to the event handler function. All event handlers can use `this` as a reference to the bot.
 
+All events have at least one data property `eventType`, which contains the name of the event type that was triggered.
+
 * **connect** - Fires when the bot connects to the room
-  * _(no event data)_
+  * _(no extra event data)_
 
 * **disconnect** - Fires when the bot is disconnected from the room
-  * _(no event data)_
+  * _(no extra event data)_
 
 * **ping** - Fires whenever a ping is made to the server
-  * _(no event data)_
+  * _(no extra event data)_
 
 * **message** - Fires when a message is recieved in chat
   * _username_ - The username who sent the message

@@ -128,6 +128,11 @@ module.exports = function(config){
                 disconnect();
         });
     },
+    htmlEntityDecode = function(text){
+        return text.replace(/&#(\d+);/g, function(entity, num){
+            return String.fromCharCode(num);
+        });
+    }
     parseResponse = function(lines){
         lines.forEach(function(line){
             var r = /^\[([^\]]+)\]/,
@@ -142,7 +147,7 @@ module.exports = function(config){
                         if(username){
                             trigger('message', {
                                 username: username,
-                                message: message,
+                                message: htmlEntityDecode(message),
                                 emote: !!parse[2]
                             });
                         } else {
@@ -163,7 +168,7 @@ module.exports = function(config){
                     if(username != config.user){
                         trigger('whisper', {
                             username: username,
-                            message: parse[2]
+                            message: htmlEntityDecode(parse[2])
                         });
                     }
                     break;
@@ -173,7 +178,7 @@ module.exports = function(config){
                     if(!/\|from you to /.test(line)){
                         trigger('pm', {
                             username: parse[1],
-                            message: parse[2]
+                            message: htmlEntityDecode(parse[2])
                         });
                     }
                     break;

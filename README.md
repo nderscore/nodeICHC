@@ -36,7 +36,7 @@ Calling the `ICHC` function creates a new bot. It takes a single parameter of an
 **Default:** `true`
 
 * **_reconnectInterval*_** - How often to attempt reconnects in ms. 
-**Default:** `30000` (3 seconds)
+**Default:** `30000` (30 seconds)
 
 * **_debug*_** - Enables debug logging of all requests/repsonses from the server.
 **Default:** `false`
@@ -168,6 +168,9 @@ All events have at least one data property `eventType`, which contains the name 
 
 * **userCamDown** - Fires when a user cams up
   * _username_ - The username who cammed down
+
+* **send** - Fires when the bot sends a message
+  * _message_ - The message that was sent
 
 * **error** - Fires when an error occurs
   * _message_ - Message containing information about the error

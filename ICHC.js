@@ -36,6 +36,7 @@ module.exports = function(config){
         userQuit: [],
         userCamUp: [],
         userCamDown: [],
+        send:[],
         error: []
     },
     trigger = function(type, data){
@@ -235,6 +236,9 @@ module.exports = function(config){
                     a: 'send',
                     w: message
                 }, success, fail);
+                trigger('send', {
+                    message: message
+                });
             }
             return this;
         },

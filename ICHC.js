@@ -61,7 +61,12 @@ module.exports = function(config){
         var url = isConnected ? keyedURL : baseURL;
         for(var param in params)
             url += '&' + param + '=' + params[param];
-        request.get(url).end(function(response){
+        request.get(url).
+        on('error', function(err){
+            error('Request error: ' + err);
+            fail && fail.call(chain);
+        }).
+        end(function(response){
             if(!response.ok){
                 error('Request error: ' + response.text);
                 fail && fail.call(chain);
@@ -88,7 +93,7 @@ module.exports = function(config){
         if(config.autoReconnect){
             (function reconnect(){
                 chain.connect(null, function(){
-                    setTimeout(reconnect, reconnectInterval)
+                    setTimeout(reconnect, config.reconnectInterval)
                 });
             })();
         }

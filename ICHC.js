@@ -182,7 +182,7 @@ module.exports = function(config){
                     break;
 
                 case 'c+':
-                    var parse = line.match(/1(.{12})(.+?)\./),
+                    var parse = line.match(/.(.{12})(.+?)\./),
                     hash = parse[1],
                     username = parse[2];
                     cammers[hash] =  username;

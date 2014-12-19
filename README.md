@@ -166,7 +166,7 @@ All events have at least one data property `eventType`, which contains the name 
 * **userCamUp** - Fires when a user cams up
   * _username_ - The username who cammed up
 
-* **userCamDown** - Fires when a user cams up
+* **userCamDown** - Fires when a user cams down
   * _username_ - The username who cammed down
 
 * **send** - Fires when the bot sends a message

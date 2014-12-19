@@ -113,7 +113,7 @@ module.exports = function(config){
         return text.replace(/&#(\d+);/g, function(entity, num){
             return String.fromCharCode(num);
         });
-    }
+    },
     parseResponse = function(lines){
         lines.forEach(function(line){
             var r = /^\[([^\]]+)\]/,

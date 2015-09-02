@@ -66,7 +66,8 @@ module.exports = function(config){
             error('Request error: ' + err);
             fail && fail.call(chain);
         }).
-        end(function(response){
+        end(function(err, response){
+            if(!response) response = {};
             if(!response.ok){
                 error('Request error: ' + response.text);
                 fail && fail.call(chain);
@@ -256,27 +257,8 @@ module.exports = function(config){
             return this.send('/privmsg ' + username + ' ' + message, success, fail);
         },
 
-        /* getter functions */
-        /* I'll build these later
-        getUsers: function(success, fail){
-            return this;
-        },
-
-        getIdlers: function(success, fail){
-            return this;
-        },
-
-        getMods: function(success, fail){
-            return this;
-        },
-
-        getCammers: function(success, fail){
-            return this;
-        },
-        */
-
-        /* event listener functions */
-
+        
+        /* event listener methods */
         on: function(evt, handler){
             evt.split(' ').forEach(function(evt){
                 if(!listeners[evt])
